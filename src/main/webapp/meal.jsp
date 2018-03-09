@@ -14,18 +14,45 @@
 <body>
 <a href="index.html">Home</a>
 <h2>Meal</h2>
+<div class="row">
+    <a href="meal?action=create">Create Entity</a>
+</div>
 <div>
-    <ul>
-        <%--<jsp:useBean id="mealList" scope="request" type="java.util.List"/>--%>
+    <table>
+        <thead>
+        <tr>
+            <td>Description</td>
+            <td>Calories</td>
+            <td>Date</td>
+            <td>Action</td>
+        </tr>
+        </thead>
+        <tbody>
         <c:forEach var="meal" items="${mealList}">
             <c:if test="${meal.exceed}">
-                <li style="color: red">${meal.description} ${meal.calories} ${meal.date} </li>
+                <%--<c:out value="${meal.exceed ?  somevariable: 'empty'}" />--%>
+                <tr style="color: red">
+                    <td>${meal.description}</td>
+                    <td>${meal.calories}</td>
+                    <td>${meal.date}</td>
+                    <td><a href="meal?action=delete&id=${meal.id}">Delete</a>
+                        <a href="meal?action=edit&id=${meal.id}">Edit</a>
+                    </td>
+                </tr>
             </c:if>
             <c:if test="${!meal.exceed}">
-                <li>${meal.description} ${meal.calories} ${meal.date} </li>
+                <tr>
+                    <td>${meal.description}</td>
+                    <td>${meal.calories}</td>
+                    <td>${meal.date}</td>
+                    <td><a href="meal?action=delete&id=${meal.id}">Delete</a>
+                        <a href="meal?action=edit&id=${meal.id}">Edit</a>
+                    </td>
+                </tr>
             </c:if>
         </c:forEach>
-    </ul>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
